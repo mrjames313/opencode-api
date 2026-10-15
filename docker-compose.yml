@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  sglang-backend:
+    image: lmsysorg/sglang:latest
+    container_name: sglang-opencode-server
+    restart: unless-stopped
+    environment:
+      - HF_TOKEN=${HF_TOKEN:-}
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    ports:
+      - "8000:8000"
+    ipc: host
+    shm_size: '16gb'
+    volumes:
+      - hf_cache:/root/.cache/huggingface
+    command: >
+      python3 -m sglang.launch_server 
+      --model-path ${MODEL_PATH:-qwen/Qwen2.5-32B-Instruct} 
+      --port 8000 
+      --host 0.0.0.0 
+      --mem-fraction-static 0.75
+
+volumes:
+  hf_cache:
+    name: opencode_hf_cache
