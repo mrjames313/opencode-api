@@ -1,0 +1,41 @@
+## Env / secrets
+.env
+.env.production
+.env.local
+*.env
+*.pem
+*.key
+*.token
+
+# Model weights, cache, etc
+.cache/
+huggingface_cache/
+model_weights/
+*.bin
+*.safetensors
+*.gguf
+*.pt
+*.pth
+
+# Rag, Vector DBs
+.chroma
+chroma_db/
+qdrant_storage/
+*.db
+*.sqlite
+*.sqlite3
+
+# Docker, system, python files
+.docker/
+docker-compose.override.yml
+.DS_Store
+Thumbs.db
+node_modules/
+__pycache__/
+*.pyc
+*.log
+
+# Auto-save
+*~
+\#*\#
+.\#*
